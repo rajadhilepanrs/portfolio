@@ -44,5 +44,8 @@ Thumbs.db
 # Temporary
 tmp/
 
-# Figma cache (if you prefer to ignore)
-.figma/
+# Figma cache — site.json is real config the vite build imports directly,
+# so it must stay tracked; only ignore anything else under .figma/.
+.figma/*
+!.figma/make
+!.figma/make/site.json

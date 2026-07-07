@@ -1,0 +1,10 @@
+{
+  "description": "Showcase your video editing expertise with a luxurious 3D portfolio website, featuring stunning visuals and interactive elements to captivate potential clients.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
