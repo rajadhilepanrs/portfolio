@@ -17,18 +17,20 @@ export default function Cursor() {
     const onLeave = () => setHovering(false)
 
     const loop = () => {
+      // transform (not left/top) so the browser can composite this on the
+      // GPU instead of forcing a layout reflow every frame — that reflow
+      // was the main source of the laggy/stuttery feel.
       if (dotRef.current) {
-        dotRef.current.style.left = pos.current.x + 'px'
-        dotRef.current.style.top = pos.current.y + 'px'
+        dotRef.current.style.transform = `translate3d(${pos.current.x}px, ${pos.current.y}px, 0) translate(-50%, -50%)`
       }
 
-      // Ring follows with lag
-      ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.13
-      ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.13
+      // Ring follows with a light trailing lag (by design), just snappier
+      // than before so it doesn't feel like it's dragging behind.
+      ringPos.current.x += (pos.current.x - ringPos.current.x) * 0.22
+      ringPos.current.y += (pos.current.y - ringPos.current.y) * 0.22
 
       if (ringRef.current) {
-        ringRef.current.style.left = ringPos.current.x + 'px'
-        ringRef.current.style.top = ringPos.current.y + 'px'
+        ringRef.current.style.transform = `translate3d(${ringPos.current.x}px, ${ringPos.current.y}px, 0) translate(-50%, -50%)`
       }
 
       raf.current = requestAnimationFrame(loop)

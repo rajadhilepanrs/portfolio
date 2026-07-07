@@ -2,8 +2,7 @@ import { useState } from 'react'
 
 const contactInfo = [
   { icon: '📧', label: 'Email', value: 'rajadhileepan@visuals.in' },
-  { icon: '📱', label: 'Phone', value: '+91 98765 43210' },
-  { icon: '📍', label: 'Location', value: 'Chennai, Tamil Nadu, India' },
+  { icon: '📱', label: 'Phone', value: '+91 9080191679' },
 ]
 
 export default function Contact() {

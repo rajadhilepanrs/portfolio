@@ -137,7 +137,7 @@ export default function Hero() {
     const heroSection = heroSectionRef.current
     const heroPhoto = heroPhotoRef.current
     const slot = heroPhotoSlotRef.current
-    const navBrand = document.querySelector('.brand-text') as HTMLElement | null
+    const navBrand = document.querySelector('.navbar-brand') as HTMLElement | null
 
     if (!heroSection || !heroPhoto || !slot || !navBrand) return
 
@@ -343,7 +343,11 @@ export default function Hero() {
         flexDirection: isDesktop ? 'row' : 'column',
         alignItems: 'center',
         gap: isDesktop ? 'clamp(40px, 6vw, 90px)' : '40px',
-        padding: '0 24px',
+        // Stacked mobile/tablet content is often taller than 100vh, which
+        // collapses the section's centering — without this the first item
+        // (the photo) ends up flush against the top edge, underneath the
+        // transparent fixed navbar.
+        padding: isDesktop ? '0 24px' : 'clamp(90px, 22vw, 130px) 24px 60px',
         maxWidth: isDesktop ? 1200 : 640,
         width: '100%',
       }}>
@@ -560,26 +564,31 @@ export default function Hero() {
         </div>
       )}
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute', bottom: 44, left: '50%',
-        transform: 'translateX(-50%)', zIndex: 10,
-        display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
-        opacity: 0, animation: 'fadeIn 1s ease-out 1.6s forwards',
-      }}>
-        <span style={{
-          fontFamily: 'var(--font-sub)', fontSize: '0.65rem',
-          letterSpacing: '0.35em', color: 'rgba(255,255,255,0.35)',
-          textTransform: 'uppercase',
-        }}>
-          Scroll
-        </span>
+      {/* Scroll indicator — bottom:44 is relative to the section box, which
+          only reliably lines up with the viewport bottom when the section is
+          ~100vh (desktop). Stacked mobile/tablet content routinely grows
+          taller than 100vh, which would land this mid-content instead. */}
+      {isDesktop && (
         <div style={{
-          width: 1, height: 55,
-          background: 'linear-gradient(to bottom, var(--purple), transparent)',
-          animation: 'float 1.8s ease-in-out infinite',
-        }} />
-      </div>
+          position: 'absolute', bottom: 44, left: '50%',
+          transform: 'translateX(-50%)', zIndex: 10,
+          display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10,
+          opacity: 0, animation: 'fadeIn 1s ease-out 1.6s forwards',
+        }}>
+          <span style={{
+            fontFamily: 'var(--font-sub)', fontSize: '0.65rem',
+            letterSpacing: '0.35em', color: 'rgba(255,255,255,0.35)',
+            textTransform: 'uppercase',
+          }}>
+            Scroll
+          </span>
+          <div style={{
+            width: 1, height: 55,
+            background: 'linear-gradient(to bottom, var(--purple), transparent)',
+            animation: 'float 1.8s ease-in-out infinite',
+          }} />
+        </div>
+      )}
     </section>
   )
 }

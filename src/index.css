@@ -191,6 +191,64 @@ button { cursor: none; }
   text-shadow: 0 0 12px rgba(123, 46, 255, 0.28);
 }
 
+.navbar-brand {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #241a00;
+  padding: 8px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #FFE066 0%, #FFC300 55%, #FFB000 100%);
+  box-shadow:
+    0 0 18px rgba(255, 195, 0, 0.55),
+    0 0 40px rgba(255, 195, 0, 0.25),
+    0 6px 18px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  animation: yellowGlowPulse 3s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+.navbar-brand::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.55) 48%, transparent 66%);
+  background-size: 250% 100%;
+  animation: shimmer 3.2s linear infinite;
+  pointer-events: none;
+}
+
+.navbar-brand:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow:
+    0 0 28px rgba(255, 195, 0, 0.8),
+    0 0 60px rgba(255, 195, 0, 0.4),
+    0 8px 22px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+@keyframes yellowGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 18px rgba(255, 195, 0, 0.55),
+      0 0 40px rgba(255, 195, 0, 0.25),
+      0 6px 18px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    box-shadow:
+      0 0 26px rgba(255, 195, 0, 0.8),
+      0 0 55px rgba(255, 195, 0, 0.4),
+      0 6px 18px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+}
+
 .purple-gradient-text {
   background: linear-gradient(135deg, #7B2EFF 0%, #C77DFF 50%, #7B2EFF 100%);
   background-size: 200% auto;
@@ -281,27 +339,31 @@ button { cursor: none; }
 .cursor-dot {
   pointer-events: none;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 8px;
   height: 8px;
   background: var(--purple-light);
   border-radius: 50%;
   z-index: 99999;
-  transform: translate(-50%, -50%);
+  will-change: transform;
   box-shadow: 0 0 10px var(--purple-glow), 0 0 25px rgba(123, 46, 255, 0.4);
-  transition: transform 0.08s ease, width 0.25s ease, height 0.25s ease, background 0.25s ease;
+  transition: width 0.25s ease, height 0.25s ease, background 0.25s ease;
   mix-blend-mode: screen;
 }
 
 .cursor-ring {
   pointer-events: none;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 38px;
   height: 38px;
   border: 1.5px solid rgba(123, 46, 255, 0.7);
   border-radius: 50%;
   z-index: 99998;
-  transform: translate(-50%, -50%);
-  transition: transform 0.18s ease, width 0.28s ease, height 0.28s ease, border-color 0.25s ease, background 0.25s ease;
+  will-change: transform;
+  transition: width 0.28s ease, height 0.28s ease, border-color 0.25s ease, background 0.25s ease;
   box-shadow: 0 0 15px rgba(123, 46, 255, 0.3);
 }
 

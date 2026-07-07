@@ -52,8 +52,8 @@ export default function Navbar() {
         data-hover
       >
         <span
-          className="brand-text"
-          style={{ fontSize: '1.1rem', fontWeight: 700 }}
+          className="navbar-brand"
+          style={{ fontSize: '1.05rem' }}
         >
           rajadhileepan
         </span>
