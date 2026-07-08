@@ -1,5 +1,5 @@
 const socials = [
-  { label: 'Instagram', icon: '📸', href: '#' },
+  { label: 'Instagram', icon: '📸', href: 'https://instagram.com/rajadhileepan' },
   { label: 'YouTube', icon: '▶', href: '#' },
   { label: 'LinkedIn', icon: '💼', href: '#' },
   { label: 'Behance', icon: '🎨', href: '#' },

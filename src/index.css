@@ -375,6 +375,84 @@ button { cursor: none; }
   box-shadow: 0 0 25px rgba(123, 46, 255, 0.5);
 }
 
+/* Floating social action buttons */
+.social-float {
+  position: fixed;
+  right: 24px;
+  bottom: 28px;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.social-float-btn {
+  position: relative;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, rgba(123, 46, 255, 0.28), rgba(74, 27, 153, 0.38));
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(123, 46, 255, 0.45);
+  color: #fff;
+  text-decoration: none;
+  box-shadow: 0 0 18px rgba(123, 46, 255, 0.45), 0 0 40px rgba(123, 46, 255, 0.18), 0 4px 14px rgba(0, 0, 0, 0.35);
+  animation: glowPulse 3s ease-in-out infinite;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+}
+
+.social-float-btn:hover {
+  transform: scale(1.14) translateY(-2px);
+  background: linear-gradient(135deg, rgba(123, 46, 255, 0.5), rgba(157, 95, 255, 0.42));
+  border-color: var(--purple-light);
+  box-shadow: 0 0 30px rgba(123, 46, 255, 0.8), 0 0 60px rgba(123, 46, 255, 0.4), 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.social-float-tooltip {
+  position: absolute;
+  right: calc(100% + 14px);
+  top: 50%;
+  transform: translateY(-50%) translateX(6px);
+  white-space: nowrap;
+  background: rgba(15, 15, 18, 0.92);
+  border: 1px solid rgba(123, 46, 255, 0.35);
+  color: #fff;
+  font-family: var(--font-sub);
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  padding: 6px 12px;
+  border-radius: 8px;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.social-float-btn:hover .social-float-tooltip {
+  opacity: 1;
+  transform: translateY(-50%) translateX(0);
+}
+
+@media (max-width: 640px) {
+  .social-float {
+    right: 16px;
+    bottom: 18px;
+    gap: 12px;
+  }
+  .social-float-btn {
+    width: 46px;
+    height: 46px;
+  }
+  /* Tooltip hover state can stick on touch devices, so skip it there */
+  .social-float-tooltip {
+    display: none;
+  }
+}
+
 /* Noise overlay */
 .noise::after {
   content: '';

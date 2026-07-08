@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import AOS from 'aos'
 import Cursor from './components/Cursor'
 import Navbar from './components/Navbar'
+import SocialFloat from './components/SocialFloat'
 import Hero from './components/Hero'
 import About from './components/About'
 import Portfolio from './components/Portfolio'
@@ -27,6 +28,7 @@ export default function App() {
     <>
       <Cursor />
       <Navbar />
+      <SocialFloat />
       <main>
         <Hero />
         <About />

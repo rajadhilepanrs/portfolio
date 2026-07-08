@@ -1,8 +1,9 @@
 import { useState } from 'react'
 
 const contactInfo = [
-  { icon: '📧', label: 'Email', value: 'rajadhileepan@visuals.in' },
-  { icon: '📱', label: 'Phone', value: '+91 9080191679' },
+  { icon: '📧', label: 'Email', value: 'rajadhileepan@visuals.in', href: 'mailto:rajadhileepan@visuals.in' },
+  { icon: '📱', label: 'Phone', value: '+91 9080191679', href: 'tel:+919080191679' },
+  { icon: '📷', label: 'Instagram', value: '@rajadhileepan', href: 'https://instagram.com/rajadhileepan' },
 ]
 
 export default function Contact() {
@@ -82,14 +83,18 @@ export default function Contact() {
             {/* Contact info cards */}
             <div style={{ display: 'flex', flexDirection: 'column', gap: 16, marginBottom: 44 }}>
               {contactInfo.map((info, i) => (
-                <div
+                <a
                   key={info.label}
+                  href={info.href}
+                  data-hover
+                  {...(info.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
                   className="glass-card"
                   data-aos="fade-up"
                   data-aos-delay={i * 100}
                   style={{
                     display: 'flex', alignItems: 'center', gap: 16,
                     padding: '16px 22px', borderRadius: 14,
+                    textDecoration: 'none',
                   }}
                   onMouseEnter={(e) => {
                     const el = e.currentTarget as HTMLElement
@@ -126,7 +131,7 @@ export default function Contact() {
                       {info.value}
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
 
