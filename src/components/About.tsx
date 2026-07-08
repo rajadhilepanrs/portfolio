@@ -1,3 +1,6 @@
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import aboutReel from '../about-reel.mp4'
+
 const specializations = [
   'Cinematic Editing',
   'Reels Editing',
@@ -9,6 +12,10 @@ const specializations = [
 ]
 
 export default function About() {
+  // Lazy-mount the video so its ~5MB file only downloads once this card is
+  // actually about to scroll into view, not on initial page load.
+  const { ref: reelRef, visible: reelVisible } = useScrollReveal<HTMLDivElement>(0.1)
+
   return (
     <section
       id="about"
@@ -149,21 +156,28 @@ export default function About() {
             style={{ display: 'flex', justifyContent: 'center' }}
           >
             <div style={{ position: 'relative', width: '100%', maxWidth: 460 }}>
-              {/* Main image card */}
+              {/* Main video card */}
               <div
+                ref={reelRef}
                 className="glass-card animate-glow-pulse"
                 style={{
                   overflow: 'hidden',
                   borderRadius: 24,
                   aspectRatio: '4/5',
                   position: 'relative',
+                  background: '#0d0d10',
                 }}
               >
-                <img
-                  src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=500&h=625&fit=crop&auto=format"
-                  alt="Video editing workspace"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
+                {reelVisible && (
+                  <video
+                    src={aboutReel}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  />
+                )}
                 {/* Color overlay */}
                 <div style={{
                   position: 'absolute', inset: 0,

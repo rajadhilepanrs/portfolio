@@ -412,6 +412,30 @@ button { cursor: none; }
   box-shadow: 0 0 30px rgba(123, 46, 255, 0.8), 0 0 60px rgba(123, 46, 255, 0.4), 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
+/* The idle float lives on the icon glyph, not the button itself — the
+   button's own transform is reserved for the hover scale above. Animating
+   both on the same element would fight each other (CSS animations win over
+   plain :hover rules on the same property), which is what caused the janky
+   cursor/hero-photo motion earlier — keeping them on separate elements
+   avoids that entirely. */
+.social-float-icon {
+  display: flex;
+  animation: socialIconFloat 3.2s ease-in-out infinite;
+}
+
+.social-float-btn:nth-child(2) .social-float-icon {
+  animation-delay: -1.1s;
+}
+
+.social-float-btn:nth-child(3) .social-float-icon {
+  animation-delay: -2.2s;
+}
+
+@keyframes socialIconFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
 .social-float-tooltip {
   position: absolute;
   right: calc(100% + 14px);
