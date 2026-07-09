@@ -1,7 +1,15 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useTilt } from '../hooks/useTilt'
 
-const projects = [
+const projects: {
+  title: string
+  category: string
+  desc: string
+  img: string
+  video?: string
+  tags: string[]
+  color: string
+}[] = [
   {
     title: 'Mountain Chronicles',
     category: 'Documentary',
@@ -55,13 +63,33 @@ const projects = [
 function ProjectCard({ project, delay }: { project: (typeof projects)[0]; delay: number }) {
   const { ref, tiltStyle, shinePos, onMouseMove, onMouseLeave } = useTilt(10)
   const [hovered, setHovered] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const handleEnter = () => {
+    setHovered(true)
+    // play() returns a promise that rejects if pause() interrupts it — which
+    // happens routinely when a user hovers quickly across several cards.
+    // That rejection is expected, not an error, so it's swallowed here
+    // rather than left to surface as an unhandled rejection in the console.
+    videoRef.current?.play().catch(() => {})
+  }
+
+  const handleLeave = () => {
+    onMouseLeave()
+    setHovered(false)
+    const video = videoRef.current
+    if (video) {
+      video.pause()
+      video.currentTime = 0
+    }
+  }
 
   return (
     <div
       ref={ref}
       onMouseMove={onMouseMove}
-      onMouseLeave={() => { onMouseLeave(); setHovered(false) }}
-      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={handleLeave}
+      onMouseEnter={handleEnter}
       data-hover
       data-aos="fade-up"
       data-aos-delay={Math.round(delay * 1000)}
@@ -82,18 +110,41 @@ function ProjectCard({ project, delay }: { project: (typeof projects)[0]; delay:
           transition: 'box-shadow 0.4s ease',
         }}
       >
-        {/* Image */}
+        {/* Preview — the aspect-ratio box above is fixed regardless of
+            whether an image or video ends up filling it, so swapping
+            between the two never causes layout shift. */}
         <div style={{ position: 'relative', overflow: 'hidden', aspectRatio: '16/10' }}>
-          <img
-            src={project.img}
-            alt={project.title}
-            style={{
-              width: '100%', height: '100%', objectFit: 'cover',
-              display: 'block',
-              transform: hovered ? 'scale(1.08)' : 'scale(1)',
-              transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-            }}
-          />
+          {project.video ? (
+            <video
+              ref={videoRef}
+              poster={project.img}
+              muted
+              loop
+              playsInline
+              preload="none"
+              aria-label={project.title}
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                display: 'block',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            >
+              <source src={project.video} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={project.img}
+              alt={project.title}
+              loading="lazy"
+              style={{
+                width: '100%', height: '100%', objectFit: 'cover',
+                display: 'block',
+                transform: hovered ? 'scale(1.08)' : 'scale(1)',
+                transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+              }}
+            />
+          )}
 
           {/* Overlay */}
           <div style={{
