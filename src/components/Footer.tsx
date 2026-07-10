@@ -204,7 +204,7 @@ export default function Footer() {
             fontFamily: 'var(--font-body)', fontSize: '0.82rem',
             color: 'rgba(255,255,255,0.35)',
           }}>
-            © 2024 <span style={{ color: 'var(--purple-light)' }}>rajadhileepan.visuals</span>. All rights reserved.
+            © 2026 - 2027 <span style={{ color: 'var(--purple-light)' }}>rajadhileepan.visuals</span>. All rights reserved.
           </p>
           <p style={{
             fontFamily: 'var(--font-sub)', fontSize: '0.78rem',
