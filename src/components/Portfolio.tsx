@@ -1,5 +1,8 @@
 import { useRef, useState } from 'react'
 import { useTilt } from '../hooks/useTilt'
+import aboutReel from '../about-reel.mp4'
+import portfolioReel1 from '../portfolio-reel-1.mp4'
+import portfolioReel2 from '../portfolio-reel-2.mp4'
 
 const projects: {
   title: string
@@ -15,6 +18,7 @@ const projects: {
     category: 'Documentary',
     desc: 'A sweeping cinematic journey through untouched Himalayan landscapes.',
     img: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=380&fit=crop&auto=format',
+    video: aboutReel,
     tags: ['Color Grade', '4K', 'DaVinci'],
     color: '#7B2EFF',
   },
@@ -23,6 +27,7 @@ const projects: {
     category: 'Cinematic Short',
     desc: 'Urban noir short film blending neon light and deep shadows.',
     img: 'https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&h=380&fit=crop&auto=format',
+    video: portfolioReel1,
     tags: ['VFX', 'Grading', 'After Effects'],
     color: '#9D5FFF',
   },
@@ -31,6 +36,7 @@ const projects: {
     category: 'Commercial Ad',
     desc: 'Luxury brand commercial with cinematic product photography integration.',
     img: 'https://images.unsplash.com/photo-1556742031-c6961e8560b0?w=600&h=380&fit=crop&auto=format',
+    video: portfolioReel2,
     tags: ['Commercial', 'Motion', 'Premiere'],
     color: '#7B2EFF',
   },
@@ -39,6 +45,7 @@ const projects: {
     category: 'Sports Promo',
     desc: 'High-octane sports promotional reel with dynamic fast cuts.',
     img: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&h=380&fit=crop&auto=format',
+    video: aboutReel,
     tags: ['Fast Cut', 'SFX', 'Motion Blur'],
     color: '#9D5FFF',
   },
@@ -47,6 +54,7 @@ const projects: {
     category: 'Wedding Film',
     desc: 'Emotional cinematic wedding film capturing timeless moments.',
     img: 'https://images.unsplash.com/photo-1519741497674-611481863552?w=600&h=380&fit=crop&auto=format',
+    video: portfolioReel1,
     tags: ['Cinematic', 'Color Grade', 'Audio'],
     color: '#7B2EFF',
   },
@@ -55,6 +63,7 @@ const projects: {
     category: 'Corporate Video',
     desc: 'Futuristic corporate brand film with motion graphics integration.',
     img: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&h=380&fit=crop&auto=format',
+    video: portfolioReel2,
     tags: ['Motion GFX', '3D', 'After Effects'],
     color: '#9D5FFF',
   },
